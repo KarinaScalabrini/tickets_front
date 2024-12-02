@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import './Login.css';
 import axios from "axios";
 
@@ -6,6 +7,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,10 +15,11 @@ const Login = () => {
 
         try{
             const response = await axios.post('http://localhost:8181/login', {email, password})
-            const {token} = response.data;
+            const {token, user} = response.data;
 
             localStorage.setItem("token", token);
-
+            localStorage.setItem("user", JSON.stringify(user))
+            navigate('/home');
         }catch(error){
             setError("Invalid credentials");
         }
@@ -34,7 +37,7 @@ const Login = () => {
                     <label for="exampleFormControlTextarea1" className="form-label">Senha:</label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
-                <button type="submit"  className="btn btn-login w-75 mx-auto mt-2">Login</button>
+                <button type="submit"  className="btn btn-login btn-dark w-75 mx-auto mt-2">Login</button>
             </form>
         </div>
     );
