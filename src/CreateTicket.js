@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./Login.css";
 
 const CreateTicket = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
     const [ticket, setTicket] = useState({
         title: "",
         description: "",
@@ -32,7 +32,7 @@ const CreateTicket = () => {
 
     const getDepartments = async () => {
         try {
-            const response = await axios.get("http://localhost:8181/departments");
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/departments`);
             const fetchedDepartments = response.data;
 
             setDepartments(fetchedDepartments);
@@ -64,7 +64,7 @@ const CreateTicket = () => {
                 return;
             }
 
-            await axios.post("http://localhost:8181/ticket", ticket);
+            await axios.post(`${process.env.REACT_APP_API_URL}/ticket`, ticket);
             alert("Ticket criado com sucesso!");
             navigate("/Home");
         } catch (error) {
@@ -73,21 +73,26 @@ const CreateTicket = () => {
     };
 
     return (
-        <div className="w-100 h-100 d-flex flex-column align-items-center">
-            <nav className="bg-warning navBarHome navbar navbar-expand-lg w-100">
-                <h5 className="ms-5">TICKETS</h5>
-                <div className="collapse navbar-collapse w-25" id="navbarNav">
-                    <ul className="navbar-nav">
+        <div className="w-100 h-100 d-flex flex-column align-items-center bg-light">
+            <nav className="d-flex justify-content-between align-items-center bg-warning navbar navbar-expand-lg w-100 p-0">
+                <h5 className="ms-5">TICKETS <i className="bi bi-postcard"></i></h5>
+                <div className="d-flex me-5">
+                    <ul className="navbar-nav d-flex flex-row gap-2">
                         <li className="nav-item btn-light d-flex flex-row align-items-center">
-                            <a type="button" className="btn btn-dark" href="/Home">
-                                Voltar
-                            </a>
+                            <a type="button" className="btn btn-dark btn-sm w-100" href="/Home">Voltar</a>
+                        </li>
+                        <li className="nav-item btn-light d-flex flex-row align-items-center me-5">
+                            <a type="button" className="btn btn-dark btn-sm w-100" href="/CreateTicket">Novo Ticket</a>
+                        </li>
+                        <li className="nav-item btn-light d-flex flex-row align-items-center">
+                            <i className="bi bi-person-bounding-box fs-4"></i>
+                            <a className="nav-link fw-semibold fs-5" href="/Me">{user.name}</a>
                         </li>
                     </ul>
-                </div>
+                </div>    
             </nav>
             <form
-                className="form-login w-50 mx-auto mt-5 border rounded p-5 d-flex flex-column justify-content-center text-start"
+                className="form-create bg-dark-subtle w-50 mx-auto mt-5 border rounded p-5 d-flex flex-column justify-content-center text-start"
                 onSubmit={handleSubmit}
             >
                 <div className="mb-3 d-flex flex-column">

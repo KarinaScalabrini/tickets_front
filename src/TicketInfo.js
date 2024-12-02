@@ -8,7 +8,7 @@ const TicketInfo = () => {
     const [ticket, setTicket] = useState({
         title: '',
         description: '',
-        observation: '',
+        observacao: '',
         id_state: '',
         department: { title: '' },
         id_user: user.id,
@@ -17,7 +17,7 @@ const TicketInfo = () => {
     useEffect(() => {
         const fetchTicket = async () => {
             try {
-                const response = await fetch(`http://localhost:8181/ticket/${id}`);
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/ticket/${id}`);
                 const data = await response.json();
                 setTicket(prevTicket => ({
                     ...prevTicket,  
@@ -43,13 +43,13 @@ const TicketInfo = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (ticket.id_state === '4' && !ticket.observation.trim()) {
+        if (ticket.id_state === '3' && !ticket.observacao.trim()) {
             alert('O campo "Observações" é obrigatório quando o status é "Recusado".');
             return;
         }
 
         try {
-            const response = await fetch(`http://localhost:8181/ticket/${id}`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/ticket/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const TicketInfo = () => {
             </nav>
             <form 
                 onSubmit={handleSubmit} 
-                className="form-login w-50 mx-auto mt-5 border rounded p-5 d-flex flex-column justify-content-center text-start"
+                className="form-create bg-dark-subtle w-50 mx-auto mt-5 border rounded p-5 d-flex flex-column justify-content-center text-start"
             >
                 <div className="mb-3 d-flex flex-column">
                     <label htmlFor="title" className="form-label">Título:</label>
@@ -123,7 +123,7 @@ const TicketInfo = () => {
                         <textarea 
                             className="form-control" 
                             id="observation"
-                            name="observation" 
+                            name="observacao" 
                             rows="3" 
                             value={ticket.observacao}
                             onChange={handleChange}

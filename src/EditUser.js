@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Home.css';
 
 const EditUser = () => {
     const [user, setUser] = useState({
@@ -33,7 +32,7 @@ const EditUser = () => {
             if (!updatedUser.password) {
                 delete updatedUser.password;
             }
-            await axios.put(`http://localhost:8181/users/${user.id}`, updatedUser);
+            await axios.put(`${process.env.REACT_APP_API_URL}/users/${user.id}`, updatedUser);
 
             localStorage.setItem("user", JSON.stringify(updatedUser));
             alert("Usuário atualizado com sucesso!");
@@ -44,7 +43,7 @@ const EditUser = () => {
 
     const getDepartments = async () => {
         try {
-            const response = await axios.get('http://localhost:8181/departments');
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/departments`);
             const fetchedDepartments = response.data;
 
             setDepartments(fetchedDepartments);

@@ -1,0 +1,6 @@
+.ulMenu > li:hover{
+    background-color: #f1f1f1;
+    color:rgb(14, 13, 13);
+    padding: 15px 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

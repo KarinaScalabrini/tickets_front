@@ -1,3 +1,32 @@
-.form-login{
+.login {
+    position: relative;
     background-color: #dbdbdb;
+    background-image: url('../public/pexels.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(19, 18, 18, 0.5);
+    z-index: 1;
+}
+
+.login > * {
+    position: relative;
+    z-index: 2;
+}
+.form-login{
+    background-color: #0f0f0fc0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.767);
+}
+.registre{
+    font-size: 0.6em;
 }
