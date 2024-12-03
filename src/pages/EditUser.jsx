@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from '../components/Navbar';
+import SidebarMenu from '../components/SidebarMenu';
 
 const EditUser = () => {
     const [user, setUser] = useState({
@@ -40,6 +42,11 @@ const EditUser = () => {
             setError("Erro ao atualizar o usuário");
         }
     };
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = '/login';
+    };
 
     const getDepartments = async () => {
         try {
@@ -61,12 +68,13 @@ const EditUser = () => {
 
     return (
         <div className="h-100">
-            <nav className="bg-warning navbar navbar-expand-lg w-100">
-                <h5 className='ms-4'>TICKETS</h5>
-            </nav>
-            <div className="container mt-5">
+            <Navbar user={user} handleLogout={handleLogout} />
+            <main className="w-100 h-100 d-flex flex-row ">
+                <SidebarMenu />
+                <div className="d-flex flex-column justify-content-center align-items-center w-100">
+                    <h2>Meus Dados <i class="bi bi-pencil"></i></h2>
                 <form
-                    className="form-login w-50 mx-auto border rounded p-5 d-flex flex-column justify-content-center"
+                    className="bg-dark-subtle w-50 h-50 mx-auto mt-5 border rounded p-5 d-flex flex-column justify-content-center text-start"
                     onSubmit={handleSubmit}
                 >
                     <div className="mb-3 d-flex flex-column">
@@ -120,8 +128,9 @@ const EditUser = () => {
                         Salvar
                     </button>
                 </form>
-                {error && <p className="text-danger text-center mt-2">{error}</p>}
             </div>
+                {error && <p className="text-danger text-center mt-2">{error}</p>}
+            </main>
         </div>
     );
 };

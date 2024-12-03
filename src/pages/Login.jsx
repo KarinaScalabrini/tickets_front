@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import './Login.css';
+import '../styles/Login.css';
 import axios from "axios";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
                     <input type="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
                 <a href="//" className="text-white-50 text-decoration-none text-start fw-semibold registre">Não tem uma conta? Registre-se</a>
-                <button type="submit"  className="btn btn-login fw-semibold bg-warning-subtle w-100 mx-auto mt-3">Login</button>
+                <button type="submit"  className="btn btn-login fw-semibold bg-warning w-100 mx-auto mt-3">Login</button>
             </form>
         </div>
     );

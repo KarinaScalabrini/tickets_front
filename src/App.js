@@ -1,11 +1,11 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './Login';
-import Home from './Home';
-import EditUser from './EditUser';
-import CreateTicket from './CreateTicket';
-import TicketInfo from './TicketInfo';
+import './styles/App.css';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import EditUser from './pages/EditUser';
+import CreateTicket from './pages/CreateTicket';
+import TicketInfo from './pages/TicketInfo';
 import AutenticatedRoute from './AutenticatedRoute';
 
 function App() {

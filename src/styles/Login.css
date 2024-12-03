@@ -1,7 +1,7 @@
 .login {
     position: relative;
     background-color: #dbdbdb;
-    background-image: url('../public/pexels.jpg');
+    background-image: url('../assets/pexels.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
