@@ -1,6 +1,6 @@
-#Projeto básico de gerenciamento de tickets
+# Projeto básico de gerenciamento de tickets
 
-###ReactJs
-###NodeJs
+### ReactJs
+### NodeJs
 
 
